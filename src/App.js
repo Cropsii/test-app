@@ -1,22 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+
+// Новый компонент EmojiButton
+function EmojiButton({ emoji, onChange }) {
+  return <button onClick={onChange}>{emoji}</button>;
+}
 
 function App() {
+  const arr = ["😍", "🥰", "❤️", "😶‍🌫️", "😘", "🤑"];
+  const [emoji, setEmoji] = useState(arr[0]);
+
+  function change() {
+    let l = arr.length;
+    let i = arr.indexOf(emoji);
+    if (i === l - 1) {
+      i = 0;
+    } else {
+      i++;
+    }
+    setEmoji(arr[i]);
+    console.log(i);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <EmojiButton emoji={emoji} onChange={change}></EmojiButton>
       </header>
     </div>
   );
